@@ -1,0 +1,137 @@
+@import '@fontsource-variable/outfit';
+@import '@fontsource-variable/space-grotesk';
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Space Grotesk Variable', 'Outfit Variable', system-ui, sans-serif;
+  --font-sans: 'Outfit Variable', system-ui, sans-serif;
+
+  --color-ink-950: #07080c;
+  --color-ink-900: #0a0b0f;
+  --color-ink-850: #10121a;
+  --color-ink-800: #141722;
+  --color-ink-700: #1c2030;
+  --color-ink-600: #272c40;
+  --color-ink-400: #4c5470;
+  --color-ink-300: #7d86a3;
+  --color-ink-200: #aab1c7;
+  --color-ink-100: #dde1ec;
+
+  --color-volt-300: #d9f99d;
+  --color-volt-400: #bef264;
+  --color-volt-500: #a3e635;
+  --color-volt-600: #84cc16;
+
+  --color-aqua-400: #22d3ee;
+  --color-aqua-500: #06b6d4;
+
+  --color-ember-400: #fb923c;
+  --color-ember-500: #f97316;
+
+  --color-rose-450: #fb7185;
+
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+  --animate-float: float 5s ease-in-out infinite;
+
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.75;
+      transform: scale(0.97);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink-900 text-ink-100 font-sans antialiased;
+  overscroll-behavior-y: none;
+  min-height: 100dvh;
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+/* Sophisticated glassy card surface */
+@utility card {
+  @apply rounded-3xl border border-ink-700/60 bg-ink-850/80;
+  background-image: linear-gradient(160deg, rgb(255 255 255 / 0.035), transparent 40%);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.04) inset,
+    0 12px 32px -16px rgb(0 0 0 / 0.65);
+}
+
+@utility card-interactive {
+  @apply card transition-transform duration-200 active:scale-[0.98];
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-4 font-display font-semibold text-ink-950;
+  background-image: linear-gradient(120deg, var(--color-volt-400), var(--color-volt-500) 55%, #65d9a5);
+  box-shadow:
+    0 10px 28px -10px rgb(163 230 53 / 0.45),
+    0 1px 0 rgb(255 255 255 / 0.35) inset;
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease;
+}
+.btn-primary:active {
+  transform: scale(0.97);
+  filter: brightness(1.06);
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-2xl border border-ink-600 bg-ink-800/70 px-5 py-3.5 font-display font-medium text-ink-100 transition-transform duration-150 active:scale-[0.97];
+}
+
+.chip {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-ink-600/70 bg-ink-800/80 px-3 py-1 text-xs font-medium text-ink-200;
+}
+
+.label-caps {
+  @apply text-[11px] font-semibold tracking-[0.14em] uppercase text-ink-300;
+}
+
+/* Hide scrollbars for horizontal carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Safe-area padding for standalone PWA */
+.pb-safe {
+  padding-bottom: max(env(safe-area-inset-bottom), 0px);
+}
+.pt-safe {
+  padding-top: max(env(safe-area-inset-top), 0px);
+}
+
+input[type='range'] {
+  @apply h-1.5 w-full cursor-pointer appearance-none rounded-full bg-ink-600;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  @apply size-6 rounded-full border-2 border-ink-950 bg-volt-400;
+  box-shadow: 0 2px 10px rgb(163 230 53 / 0.5);
+}
